@@ -1,0 +1,37 @@
+{
+  "name": "weblib",
+  "version": "1.0.0",
+  "description": "Web Developer SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helixd2s/weblib.git"
+  },
+  "keywords": [
+    "CSS",
+    "JS",
+    "HTML5",
+    "SDK",
+    "Web"
+  ],
+  "author": "helixd2s",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helixd2s/weblib/issues"
+  },
+  "homepage": "https://github.com/helixd2s/weblib#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1"
+  },
+  "dependencies": {
+    "gulp-cli": "^2.3.0",
+    "gulp-exec": "^5.0.0",
+    "gulp-sourcemaps": "^2.6.5"
+  }
+}

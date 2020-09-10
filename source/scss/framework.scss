@@ -1,0 +1,96 @@
+@use "sass:string";
+@function dpi($size) {
+    @return calc(var(--modifier) * #{$size})
+};
+
+// small "p" means padding
+// small "s" means span
+// small "c" means center
+// small "cs" means span with center
+// small "n" means variable value
+// big "C" means columns
+// big "R" means rows
+// big "N" means variable division value
+
+@mixin padding-mod {
+    padding-left: dpi(var(--padding-x, 0));
+    padding-right: dpi(var(--padding-x, 0));
+    padding-top: dpi(var(--padding-y, 0));
+    padding-bottom: dpi(var(--padding-y, 0));
+};
+
+body {
+    font-size: dpi(1);
+    $modifier: 1rem; // 
+
+    // Variables
+    --modifier: #{$modifier};
+    --padding-x: dpi(2);
+    --padding-y: dpi(2);
+    --columns: 1;
+    --rows: 1;
+    --span-columns: 1;
+    --span-rows: 1;
+};
+
+.v-block {
+    position: relative;
+    left: 0; top: 0;
+    box-sizing: border-box;
+    --padding-x: dpi(1);
+    --padding-y: dpi(1);
+
+    // 
+    &, .padding {
+        @include padding-mod;
+    };
+
+    // 
+    .full-center {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    };
+
+    // 
+    &.grid, &.grid-CN, &.grid-RN { 
+        display: grid;
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 100%;
+
+        & > * {
+            grid-column: span #{var(--span-columns, 1)};
+            grid-row: span #{var(--span-columns, 1)};
+        };
+    };
+
+    // 
+    &.grid-CN { grid-template-columns: repeat(var(--columns, 1), 1fr); }
+    &.grid-RN { grid-template-rows: repeat(var(--rows, 1), 1fr); }
+
+    // 
+    &.padding-csn-CN {
+        $HP: calc(calc(calc(100% - calc(calc(100% * #{var(--span-columns,1)}) / #{var(--columns,1)})) / 2) + #{dpi(var(--padding-x,0))});
+        padding-left: $HP;
+        padding-right: $HP;
+    };
+
+    // 
+    &.padding-csn-RN {
+        $VP: calc(calc(calc(100% - calc(calc(100% * #{var(--span-rows,1)}) / #{var(--rows,1)})) / 2) + #{dpi(var(--padding-y,0))});
+        padding-top: $VP;
+        padding-bottom: $VP;
+    };
+
+    // 
+    & > .v-contain {
+        position: absolute;
+        left: 0; top: 0;
+        box-sizing: border-box;
+        min-height: 100%;
+        z-index: -1;
+        width: 100%;
+    };
+
+};
